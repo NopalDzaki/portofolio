@@ -162,6 +162,7 @@ export function About() {
             Tech Stack
           </h3>
           <div className="relative overflow-hidden w-full h-[180px] flex flex-col justify-center items-center gap-12">
+            {/* @ts-expect-error - LogoLoop is a JS component wrapped in memo */}
             <LogoLoop
               logos={techLogos1}
               speed={100}
@@ -173,6 +174,7 @@ export function About() {
               scaleOnHover
               hoverSpeed={15}
             />
+            {/* @ts-expect-error - LogoLoop is a JS component wrapped in memo */}
             <LogoLoop
               logos={techLogos2}
               speed={100}
