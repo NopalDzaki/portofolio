@@ -17,6 +17,7 @@ const round = (v, precision = 3) => parseFloat(v.toFixed(precision));
 const adjust = (v, fMin, fMax, tMin, tMax) =>
   round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin));
 
+/** @param {any} props */
 const ProfileCardComponent = ({
   avatarUrl = "<Placeholder for avatar URL>",
   iconUrl = "",

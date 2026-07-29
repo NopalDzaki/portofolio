@@ -67,6 +67,7 @@ void main() {
 }
 `;
 
+/** @param {any} props */
 const SpecularButton = ({
   children = "Get Started",
   size = "lg",

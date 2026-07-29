@@ -137,6 +137,7 @@ const useAnimationLoop = (
 };
 
 export const LogoLoop = memo(
+  /** @param {any} props */
   ({
     logos,
     speed = 120,

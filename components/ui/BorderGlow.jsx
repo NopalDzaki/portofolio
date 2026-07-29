@@ -83,6 +83,7 @@ function animateValue({
   setTimeout(() => requestAnimationFrame(tick), delay);
 }
 
+/** @param {any} props */
 const BorderGlow = ({
   children,
   className = "",
