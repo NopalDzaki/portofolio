@@ -9,7 +9,8 @@ export default function NotFound() {
           baseIntensity={0.2}
           hoverIntensity={1.5}
           enableHover={true}
-          gradient={["#3b82f6", "#8b5cf6"]} // primary to secondary
+          // @ts-expect-error - gradient prop is inferred as undefined from the JS component
+          gradient={["#3b82f6", "#8b5cf6"]}
           fontSize="clamp(5rem, 25vw, 15rem)"
           fontWeight={900}
         >
