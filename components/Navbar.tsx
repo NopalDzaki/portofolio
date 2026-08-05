@@ -1,24 +1,17 @@
 "use client";
 
 import StaggeredMenu from "./StaggeredMenu";
-import { useTheme } from "next-themes";
 import { ThemeToggleWrapper } from "./ThemeToggleWrapper";
-import { useEffect, useState } from "react";
 
 export function Navbar() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Default to dark before mounted to match layout.tsx's defaultTheme="dark"
-  const isDark = mounted ? resolvedTheme === "dark" : true;
-
   const menuItems = [
     { label: "Home", ariaLabel: "Go to home page", link: "/" },
     { label: "About", ariaLabel: "Learn about us", link: "#about" },
+    {
+      label: "Experience",
+      ariaLabel: "View our experience",
+      link: "#experience",
+    },
     { label: "Projects", ariaLabel: "View our projects", link: "#projects" },
     { label: "Contact", ariaLabel: "Get in touch", link: "#contact" },
   ];
@@ -37,12 +30,20 @@ export function Navbar() {
       socialItems={socialItems}
       displaySocials={true}
       displayItemNumbering={true}
-      menuButtonColor={isDark ? "#ededed" : "#0a0a0a"}
-      openMenuButtonColor={isDark ? "#0a0a0a" : "#ededed"}
+      menuButtonColor="var(--ink)"
+      openMenuButtonColor="var(--paper)"
       changeMenuColorOnOpen={true}
-      colors={isDark ? ["#ffffff", "#3b82f6"] : ["#0a0a0a", "#3b82f6"]}
-      accentColor="#3b82f6"
-      headerLeftContent={<ThemeToggleWrapper />}
+      colors={["var(--ink)"]}
+      accentColor="var(--accent)"
+      headerLeftContent={
+        <div className="flex items-center gap-3 font-sans font-medium">
+          <div className="w-8 h-8 rounded-full border border-border-light flex items-center justify-center font-serif italic text-lg">
+            N
+          </div>
+          <span className="text-sm tracking-wide hidden sm:block">Nopal / PORTFOLIO</span>
+        </div>
+      }
+      headerRightContent={<ThemeToggleWrapper />}
     />
   );
 }

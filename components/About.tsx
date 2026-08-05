@@ -1,191 +1,113 @@
 "use client";
 
-import { motion } from "framer-motion";
-import {
-  SiC,
-  SiCplusplus,
-  SiHtml5,
-  SiGo,
-  SiJavascript,
-  SiTypescript,
-  SiVercel,
-  SiChartdotjs,
-  SiBun,
-  SiBootstrap,
-  SiFlutter,
-  SiJsonwebtokens,
-  SiLaravel,
-  SiNpm,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiReact,
-  SiTailwindcss,
-  SiThreedotjs,
-  SiVite,
-  SiVuedotjs,
-  SiSupabase,
-  SiSqlite,
-  SiMysql,
-  SiFigma,
-  SiGit,
-  SiGithub,
-  SiPostman,
-  SiDocker,
-  SiCodecov,
-} from "react-icons/si";
-import { FaJava } from "react-icons/fa";
-import { LayoutTemplate, Globe, Server, Database } from "lucide-react";
-import BorderGlow from "@/components/ui/BorderGlow";
-import LogoLoop from "@/components/ui/LogoLoop";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { useRef } from "react";
 
-const expertise = [
-  {
-    icon: <LayoutTemplate className="w-6 h-6" />,
-    title: "UI/UX Design",
-    description:
-      "Designing intuitive user experiences, wireframing, prototyping, and responsive interface design.",
-  },
-  {
-    icon: <Globe className="w-6 h-6" />,
-    title: "Frontend Development",
-    description:
-      "Building responsive and interactive web applications focusing on clean code and performance.",
-  },
-  {
-    icon: <Server className="w-6 h-6" />,
-    title: "Backend Development",
-    description:
-      "Developing robust backend systems, APIs, and integrating various services seamlessly.",
-  },
-  {
-    icon: <Database className="w-6 h-6" />,
-    title: "Systems & Data",
-    description:
-      "Strong foundation in Information Systems, database fundamentals, and software engineering.",
-  },
+const capabilities = [
+  { text: "I build ", highlight: false },
+  { text: "full-stack web systems", highlight: true },
+  { text: "with ", highlight: false },
+  { text: "intuitive interfaces", highlight: true },
+  { text: ", ", highlight: false },
+  { text: "reliable", highlight: true },
+  { text: "\n", highlight: false },
+  { text: "backend architecture", highlight: true },
+  { text: ", and ", highlight: false },
+  { text: "scalable", highlight: true },
+  { text: "\n", highlight: false },
+  { text: "product foundations.", highlight: true },
 ];
 
-const techLogos1 = [
-  { node: <SiC />, title: "C" },
-  { node: <SiCplusplus />, title: "C++" },
-  { node: <SiHtml5 />, title: "HTML5" },
-  { node: <SiGo />, title: "Go" },
-  { node: <FaJava />, title: "Java" },
-  { node: <SiJavascript />, title: "JavaScript" },
-  { node: <SiTypescript />, title: "TypeScript" },
-  { node: <SiVercel />, title: "Vercel" },
-  { node: <SiChartdotjs />, title: "Chart.js" },
-  { node: <SiBun />, title: "Bun" },
-  { node: <SiBootstrap />, title: "Bootstrap" },
-  { node: <SiFlutter />, title: "Flutter" },
-  { node: <SiJsonwebtokens />, title: "JWT" },
-  { node: <SiLaravel />, title: "Laravel" },
-  { node: <SiNpm />, title: "NPM" },
+const techStack = [
+  "NEXT.JS",
+  "TYPESCRIPT",
+  "LARAVEL",
+  "NODE.JS",
+  "SUPABASE",
+  "REACT",
+  "TAILWINDCSS",
+  "FIGMA",
+  "MYSQL",
+  "POSTGRESQL",
 ];
 
-const techLogos2 = [
-  { node: <SiNextdotjs />, title: "Next JS" },
-  { node: <SiNodedotjs />, title: "NodeJS" },
-  { node: <SiReact />, title: "React Native" },
-  { node: <SiTailwindcss />, title: "TailwindCSS" },
-  { node: <SiThreedotjs />, title: "Three js" },
-  { node: <SiVite />, title: "Vite" },
-  { node: <SiVuedotjs />, title: "Vue.js" },
-  { node: <SiSupabase />, title: "Supabase" },
-  { node: <SiSqlite />, title: "SQLite" },
-  { node: <SiMysql />, title: "MySQL" },
-  { node: <SiFigma />, title: "Figma" },
-  { node: <SiGit />, title: "Git" },
-  { node: <SiGithub />, title: "GitHub" },
-  { node: <SiPostman />, title: "Postman" },
-  { node: <SiDocker />, title: "Docker" },
-  { node: <SiCodecov />, title: "CodeCov" },
-];
+const CapabilityWord = ({
+  children,
+  progress,
+  range,
+  highlight,
+}: {
+  children: React.ReactNode;
+  progress: MotionValue<number>;
+  range: [number, number];
+  highlight: boolean;
+}) => {
+  const opacity = useTransform(progress, range, [0.3, 1]);
+  const color = highlight ? "var(--paper)" : "var(--text-muted)";
+
+  return (
+    <motion.span
+      style={{ opacity, color }}
+      className={`transition-colors duration-300 ${highlight ? "font-medium" : "font-normal"}`}
+    >
+      {children}
+    </motion.span>
+  );
+};
 
 export function About() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 70%", "end 70%"],
+  });
+
   return (
     <section
       id="about"
-      className="py-24 relative overflow-hidden bg-foreground/[0.02]"
+      className="relative min-h-[90svh] bg-ink flex flex-col justify-center py-24 overflow-hidden"
+      ref={containerRef}
     >
-      <div className="max-w-7xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
-          <p className="text-foreground/70 max-w-3xl mx-auto leading-relaxed">
-            I am passionate about translating user and organizational needs into
-            digital experiences that are structured, functional, and easy to
-            use. Currently pursuing my bachelor's degree in Information Systems
-            at Institut Teknologi Sepuluh Nopember, I continuously explore new
-            technologies across the full stack.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {expertise.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="h-full"
-            >
-              <BorderGlow
-                className="p-6 rounded-2xl h-full flex flex-col"
-                backgroundColor="var(--background)"
-                borderRadius={16}
-                glowColor="210 100% 50%"
-                colors={["#f63bd4ff", "#8b5cf6", "#08daffff"]}
-                glowIntensity={5}
-                animated={true}
+      <div className="page-container flex-grow flex items-center justify-center">
+        <h2 className="text-[clamp(1.8rem,4vw,4.5rem)] leading-[1.2] md:leading-[1.1] text-center font-sans tracking-tight max-w-[1000px] whitespace-pre-wrap">
+          {capabilities.map((word, i) => {
+            const start = i / capabilities.length;
+            const end = start + 1 / capabilities.length;
+            return (
+              <CapabilityWord
+                key={i}
+                progress={scrollYProgress}
+                range={[start, end]}
+                highlight={word.highlight}
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shrink-0">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-foreground/70 leading-relaxed text-sm flex-grow">
-                  {feature.description}
-                </p>
-              </BorderGlow>
-            </motion.div>
-          ))}
-        </div>
+                {word.text}
+              </CapabilityWord>
+            );
+          })}
+        </h2>
+      </div>
 
-        <div className="mt-28">
-          <h3 className="text-2xl font-bold text-center mb-10 tracking-wide text-foreground/90 uppercase">
-            Tech Stack
-          </h3>
-          <div className="relative overflow-hidden w-full h-[180px] flex flex-col justify-center items-center gap-12">
-            <LogoLoop
-              logos={techLogos1}
-              speed={100}
-              direction="left"
-              logoHeight={48}
-              gap={56}
-              fadeOut
-              fadeOutColor="var(--background)"
-              scaleOnHover
-              hoverSpeed={15}
-            />
-            <LogoLoop
-              logos={techLogos2}
-              speed={100}
-              direction="right"
-              logoHeight={48}
-              gap={56}
-              fadeOut
-              fadeOutColor="var(--background)"
-              scaleOnHover
-              hoverSpeed={15}
-            />
-          </div>
-        </div>
+      {/* Technology Rail */}
+      <div className="w-full mt-24 mb-8 overflow-hidden flex select-none relative mask-image-fade">
+        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-ink to-transparent z-10" />
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-ink to-transparent z-10" />
+        <motion.div
+          animate={{ x: [0, -1000] }}
+          transition={{
+            repeat: Infinity,
+            repeatType: "loop",
+            duration: 20,
+            ease: "linear",
+          }}
+          className="flex flex-none gap-8 items-center text-text-muted font-mono tracking-widest text-sm sm:text-base whitespace-nowrap"
+        >
+          {[...techStack, ...techStack, ...techStack].map((tech, i) => (
+            <span key={i} className="flex items-center gap-8">
+              <span>{tech}</span>
+              <span className="text-text-muted/30">•</span>
+            </span>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

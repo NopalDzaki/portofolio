@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Instrument_Serif, Manrope, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const inter = Inter({
-  variable: "--font-inter",
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  variable: "--font-display",
+  subsets: ["latin"],
+});
+
+const manrope = Manrope({
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
@@ -72,7 +84,6 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { ThemeToggleWrapper } from "@/components/ThemeToggleWrapper";
 
 export default function RootLayout({
   children,
@@ -82,7 +93,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body
-        className={cn("min-h-full flex flex-col font-sans", inter.variable)}
+        className={cn(
+          "min-h-full flex flex-col font-sans",
+          manrope.variable,
+          instrumentSerif.variable,
+          ibmPlexMono.variable
+        )}
       >
         <ThemeProvider
           attribute="class"

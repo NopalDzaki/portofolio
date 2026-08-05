@@ -1,129 +1,194 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import SpecularButton from "@/components/ui/SpecularButton";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import ProfileCard from "@/components/ui/ProfileCard";
+import { motion, useAnimation, useMotionValue, useTransform } from "framer-motion";
+import { ArrowRight, FileText } from "lucide-react";
+import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
+const roles = [
+  "Full-Stack Web Developer",
+  "UI/UX Designer",
+  "Product-Oriented Engineer",
+];
 
 export function Hero() {
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Parallax effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useTransform(mouseY, [-500, 500], [1.2, -1.2]);
+  const rotateY = useTransform(mouseX, [-500, 500], [-1.2, 1.2]);
+  const translateX = useTransform(mouseX, [-500, 500], [-8, 8]);
+  const translateY = useTransform(mouseY, [-500, 500], [-8, 8]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    mouseX.set(clientX - innerWidth / 2);
+    mouseY.set(clientY - innerHeight / 2);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden pt-20"
+      className="relative min-h-screen bg-paper flex items-center pt-24 pb-12 overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-background">
-        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 rounded-full blur-[120px] opacity-50" />
-      </div>
-
-      <div className="relative z-10 px-4 max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="page-container relative z-10 w-full h-full flex flex-col justify-center">
+        <div className="grid lg:grid-cols-[1.25fr_0.75fr] gap-12 lg:gap-24 items-center">
+          
           {/* Left Column: Text Content */}
-          <div className="text-left">
+          <div className="flex flex-col gap-6 lg:gap-8 order-2 lg:order-1">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="flex items-center gap-4 text-ink-soft/60 hover:text-ink transition-colors"
             >
-              <h1 className="font-bold tracking-tight mb-4 leading-[1.1] pb-2">
-                <span className="block text-3xl md:text-4xl lg:text-5xl text-foreground/90 mb-2">
-                  Hi, I'm
-                </span>
-                <span className="text-5xl md:text-6xl lg:text-[5.5rem] text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                  Naufal Dzaki.
-                </span>
-              </h1>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground/70 mb-6 leading-snug">
-                Crafting Digital Experiences in UI/UX & Web Development
-              </h2>
-              <p className="text-lg text-foreground/70 mb-8 max-w-2xl leading-relaxed">
-                I'm an Information Systems student at Institut Teknologi Sepuluh
-                Nopember with a background in Software Engineering. I focus on
-                building structured, functional, responsive, and user-friendly
-                digital products from frontend to backend.
-              </p>
+              <a href="https://github.com/NopalDzaki" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <FaGithub className="w-5 h-5" />
+              </a>
+              <a href="https://www.linkedin.com/in/naufal-dzaki11/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <FaLinkedin className="w-5 h-5" />
+              </a>
+              <a href="https://instagram.com/nopal.dzaki" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <FaInstagram className="w-5 h-5" />
+              </a>
+              <a href="mailto:naufalforyou11@gmail.com" aria-label="Email">
+                <FaEnvelope className="w-5 h-5" />
+              </a>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              className="font-mono text-xs font-semibold tracking-[0.2em] text-text-muted uppercase"
             >
-              <SpecularButton
-                size="lg"
-                radius={24}
-                tint="rgba(59, 130, 246, 0.1)" // bg-primary/10
-                blur={0}
-                textColor="inherit"
-                lineColor="#3b82f6" // primary
-                baseColor="#1e40af" // primary dark
-                intensity={1}
-                shineSize={10}
-                shineFade={40}
-                thickness={2}
-                speed={1.5}
-                followMouse={true}
-                proximity={250}
-                autoAnimate={true}
-                onClick={() => {
-                  window.location.href = "#projects";
-                }}
-              >
-                View My Work <ArrowRight className="w-4 h-4" />
-              </SpecularButton>
+              SURABAYA · INDONESIA
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              className="font-sans text-[clamp(3.65rem,2.35rem+5.3vw,8.2rem)] leading-[0.92] tracking-[-0.045em] text-ink font-medium"
+            >
+              Hi, I’m <br />
+              <span className="font-display italic tracking-normal pr-4">Naufal Dzaki.</span>
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+              className="text-xl md:text-2xl text-text-secondary h-8 flex items-center"
+            >
+              <span>{roles[roleIndex]}</span>
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+                className="inline-block w-3 h-[1.1em] bg-ink ml-1 mb-[-0.1em]"
+              />
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="flex items-center gap-6 mt-12"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-4"
             >
               <a
-                href="https://github.com/NopalDzaki"
+                href="https://docs.google.com/document/d/1OtdNM6Kp0f4XS8In3M4aYVvqHnfTKO96/edit?usp=sharing&ouid=111176491291122270640&rtpof=true&sd=true"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground/50 hover:text-foreground transition-colors hover:scale-110"
+                className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-8 py-4 rounded-full bg-ink text-paper font-sans font-medium hover:bg-ink-soft transition-colors text-center"
               >
-                <FaGithub className="w-6 h-6" />
+                VIEW RESUME
+                <FileText className="w-4 h-4" />
               </a>
               <a
-                href="https://www.linkedin.com/in/naufal-dzaki11/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground/50 hover:text-foreground transition-colors hover:scale-110"
+                href="#projects"
+                className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-8 py-4 rounded-full bg-transparent border border-border-light text-ink font-sans font-medium hover:bg-black/5 transition-colors text-center"
               >
-                <FaLinkedin className="w-6 h-6" />
+                EXPLORE PROJECTS
+                <ArrowRight className="w-4 h-4" />
               </a>
             </motion.div>
           </div>
 
-          {/* Right Column: Profile Card */}
+          {/* Right Column: Portrait Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="w-full flex justify-center items-center"
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+            className="w-full flex justify-center items-center order-1 lg:order-2"
           >
-            <ProfileCard
-              handle="NopalDzaki"
-              status="Online"
-              contactText="Contact Me"
-              avatarUrl="/assets/Photo.jpeg"
-              showUserInfo
-              enableTilt={true}
-              enableMobileTilt={false}
-              onContactClick={() => {
-                window.location.href = "mailto:naufalforyou11@gmail.com";
+            <motion.div
+              style={{
+                rotateX,
+                rotateY,
+                x: translateX,
+                y: translateY,
               }}
-              behindGlowColor="rgba(125, 190, 255, 0.05)"
-              behindGlowEnabled={false}
-              innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
-            />
+              className="relative w-[320px] sm:w-[380px] lg:w-full max-w-[420px] aspect-[4/5] rounded-[24px] bg-[#1a1a1a] border border-white/10 overflow-hidden shadow-image hover:contrast-105 transition-[filter] duration-500"
+            >
+              {/* Abstract code symbols background */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden select-none font-mono text-[10px] text-white break-all leading-tight p-4">
+                {`{ function init() { const sys = new Arch(); sys.boot(0x42); return sys.ready ? "OK" : "ERR"; } } [0x88 0xFF 0x00] => { ptr: 0x90A2 } `}
+                {`const PORTFOLIO_BUILD = { version: '2.0.0', status: 'ACTIVE', author: 'NAUFAL' }; `}
+                {`function init() { const sys = new Arch(); sys.boot(0x42); return sys.ready ? "OK" : "ERR"; } } [0x88 0xFF 0x00] => { ptr: 0x90A2 } `}
+              </div>
+              
+              <Image
+                src="/assets/Photo.jpeg"
+                alt="Naufal Dzaki"
+                fill
+                priority
+                className="object-cover object-top filter grayscale opacity-90 transition-opacity duration-300 hover:opacity-100"
+                sizes="(max-width: 768px) 380px, 420px"
+              />
+              
+              {/* Status Panel */}
+              <div className="absolute bottom-4 left-4 right-4 bg-ink/80 backdrop-blur-md rounded-2xl p-4 border border-white/10 flex items-center justify-between">
+                <div>
+                  <div className="text-paper font-medium text-sm">@nopaldzaki</div>
+                  <div className="text-text-inverse-muted text-xs">Available for collaboration</div>
+                </div>
+                <div className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(36,201,139,0.6)]" />
+              </div>
+            </motion.div>
           </motion.div>
         </div>
+      </div>
+
+      {/* Hero Bottom Transition Curve */}
+      <div className="absolute bottom-0 left-0 w-full h-[8vh] md:h-[15vh] overflow-hidden pointer-events-none">
+        <svg
+          viewBox="0 0 1440 100"
+          preserveAspectRatio="none"
+          className="absolute bottom-0 w-full h-full text-ink"
+        >
+          <path
+            fill="currentColor"
+            d="M0 100 C 480 0 960 0 1440 100 Z"
+          />
+        </svg>
       </div>
     </section>
   );

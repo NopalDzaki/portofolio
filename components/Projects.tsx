@@ -1,111 +1,154 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FolderGit2, BookOpen } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
-const projects = [
-  {
-    title: "Bayucaraka UAV Web Development",
-    category: "Experience",
-    role: "Web Developer",
-    description:
-      "Web development contributions for the Media Communication division of the Bayucaraka UAV Research Team.",
-    tags: ["Web Development", "Team Collaboration", "Media"],
-    type: "experience",
-  },
-  {
-    title: "Information Systems Expo Backend",
-    category: "Experience",
-    role: "Backend Developer",
-    description:
-      "Backend development contributions for the Information Systems Expo (ISE!) 2026.",
-    tags: ["Backend Development", "System Integration"],
-    type: "experience",
-  },
+const selectedProjects = [
   {
     title: "Automatic Plant Watering System",
-    category: "Academic Project",
-    role: "Developer",
+    category: "ACADEMIC PROJECT / HARDWARE",
+    year: 2022,
     description:
       "Conceptualized an automated plant watering system using Arduino Uno and soil moisture sensors to support efficient watering based on soil conditions.",
-    tags: ["Arduino Uno", "Hardware", "IoT Concept"],
-    type: "academic",
+    highlights: [
+      "Hardware and sensor integration",
+      "Automated watering logic",
+      "Resource efficiency",
+    ],
+    technologies: ["Arduino Uno", "C++", "Sensors"],
+    link: "#",
   },
   {
     title: "SIAP BOS Information-System Analysis",
-    category: "Academic Research",
-    role: "Researcher",
+    category: "ACADEMIC RESEARCH / ANALYSIS",
+    year: 2023,
     description:
       "Academic analysis on the implementation of information technology in the SIAP BOS system and its role in supporting more accurate education funding distribution.",
-    tags: ["Systems Analysis", "Research", "Information Systems"],
-    type: "academic",
+    highlights: [
+      "Systems Analysis",
+      "Process mapping",
+      "Requirement documentation",
+    ],
+    technologies: ["Research", "Information Systems", "Analysis"],
+    link: "#",
   },
 ];
 
 export function Projects() {
   return (
-    <section id="projects" className="py-24">
-      <div className="max-w-7xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Experience & Projects
-          </h2>
-          <p className="text-foreground/70 max-w-2xl">
-            A showcase of my professional team contributions and selected
-            academic research works.
-          </p>
-        </motion.div>
+    <section id="projects" className="py-24 bg-paper relative overflow-hidden">
+      <div className="page-container">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-24">
+          <div>
+            <div className="font-mono text-xs tracking-widest text-text-muted uppercase mb-4">
+              Portfolio Showcase
+            </div>
+            <h2 className="text-5xl md:text-6xl font-sans tracking-tight text-ink font-medium">
+              SELECTED PROJECTS
+            </h2>
+          </div>
+          <a
+            href="#projects"
+            className="group flex items-center gap-2 font-sans font-medium text-ink hover:text-accent transition-colors"
+          >
+            VIEW ALL PROJECTS
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative rounded-2xl overflow-hidden bg-foreground/5 border border-foreground/10 p-8 hover:border-primary/50 transition-colors"
-            >
-              <div className="flex items-start justify-between mb-6">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-                  {project.type === "experience" ? (
-                    <FolderGit2 className="w-6 h-6" />
-                  ) : (
-                    <BookOpen className="w-6 h-6" />
-                  )}
-                </div>
-                <span className="text-xs font-medium px-3 py-1 rounded-full bg-foreground/10 text-foreground/80">
-                  {project.category}
-                </span>
+        <div className="flex flex-col gap-24 lg:gap-32">
+          {selectedProjects.map((project, index) => {
+            const isEven = index % 2 === 0;
+
+            return (
+              <div
+                key={index}
+                className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center`}
+              >
+                {/* Image / Fallback Container */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className={`relative w-full aspect-[4/3] sm:aspect-video lg:aspect-[4/3] bg-paper-bright border border-border-light rounded-xl overflow-hidden group cursor-pointer ${
+                    !isEven ? "lg:order-2" : "lg:order-1"
+                  }`}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center text-text-muted/30 font-mono text-sm">
+                    Image not available
+                  </div>
+                  {/* Custom Cursor Interaction Area */}
+                  <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-20 h-20 rounded-full bg-accent/90 backdrop-blur-sm text-ink flex items-center justify-center font-mono text-xs font-semibold tracking-wider uppercase scale-50 group-hover:scale-100 transition-transform duration-300">
+                      VIEW
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Content Container */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                  className={`flex flex-col ${
+                    !isEven ? "lg:order-1" : "lg:order-2"
+                  }`}
+                >
+                  <div className="font-mono text-xs tracking-widest text-text-muted uppercase mb-6">
+                    {project.category} / {project.year}
+                  </div>
+                  <h3 className="text-3xl sm:text-4xl font-sans font-medium text-ink mb-6 group inline-flex items-center gap-3">
+                    <a href={project.link} className="hover:text-accent transition-colors">
+                      {project.title}
+                    </a>
+                    <ArrowUpRight className="w-6 h-6 text-text-muted group-hover:text-accent group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
+                  </h3>
+                  <p className="text-lg text-text-secondary leading-relaxed mb-10 max-w-xl">
+                    {project.description}
+                  </p>
+
+                  <div className="mb-10">
+                    <div className="font-mono text-xs text-ink uppercase tracking-widest mb-4">
+                      Highlights
+                    </div>
+                    <ul className="flex flex-col gap-3">
+                      {project.highlights.map((highlight, i) => (
+                        <li key={i} className="flex items-start gap-3 text-text-secondary">
+                          <span className="text-text-muted font-mono text-xs mt-1">
+                            0{i + 1}
+                          </span>
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-10">
+                    {project.technologies.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1.5 border border-border-light rounded font-mono text-xs text-text-secondary uppercase tracking-wider bg-paper-bright"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div>
+                    <a
+                      href={project.link}
+                      className="inline-flex items-center gap-2 font-mono text-sm tracking-widest uppercase font-semibold text-ink hover:text-accent transition-colors border-b border-ink hover:border-accent pb-1"
+                    >
+                      VIEW PROJECT
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+                </motion.div>
               </div>
-
-              <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-              <p className="text-sm text-primary font-medium mb-4">
-                {project.role}
-              </p>
-
-              <p className="text-foreground/70 mb-6 leading-relaxed">
-                {project.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {project.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="text-xs font-medium px-2.5 py-1 rounded-md bg-background border border-foreground/10 text-foreground/80"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

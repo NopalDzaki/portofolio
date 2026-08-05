@@ -38,6 +38,7 @@ export interface StaggeredMenuProps {
   onMenuOpen?: () => void;
   onMenuClose?: () => void;
   headerLeftContent?: React.ReactNode;
+  headerRightContent?: React.ReactNode;
 }
 
 export const StaggeredMenu = ({
@@ -58,6 +59,7 @@ export const StaggeredMenu = ({
   onMenuOpen,
   onMenuClose,
   headerLeftContent,
+  headerRightContent,
 }: StaggeredMenuProps) => {
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
@@ -458,6 +460,18 @@ export const StaggeredMenu = ({
         className="staggered-menu-header"
         aria-label="Main navigation header"
       >
+        {headerLeftContent && (
+          <div
+            className="sm-header-left"
+            style={{
+              pointerEvents: "auto",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {headerLeftContent}
+          </div>
+        )}
         {logoUrl && (
           <div className="sm-logo" aria-label="Logo">
             <img
@@ -471,9 +485,9 @@ export const StaggeredMenu = ({
           </div>
         )}
         <div style={{ flex: 1 }}></div>
-        {headerLeftContent && (
+        {headerRightContent && (
           <div
-            className="sm-header-right"
+            className="sm-header-right-extra"
             style={{
               pointerEvents: "auto",
               marginRight: "1.5rem",
@@ -481,7 +495,7 @@ export const StaggeredMenu = ({
               alignItems: "center",
             }}
           >
-            {headerLeftContent}
+            {headerRightContent}
           </div>
         )}
         <button
