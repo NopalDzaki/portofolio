@@ -8,7 +8,7 @@ const experiences = [
     role: "Web Developer",
     organization: "Bayucaraka UAV Research Team",
     category: "PROFESSIONAL EXPERIENCE",
-    duration: "2023 — Present",
+    duration: "2026",
     description:
       "Web development contributions for the Media Communication division of the Bayucaraka UAV Research Team.",
     highlights: [
@@ -23,7 +23,7 @@ const experiences = [
     role: "Backend Developer",
     organization: "Information Systems Expo",
     category: "PROFESSIONAL EXPERIENCE",
-    duration: "2023",
+    duration: "2026",
     description:
       "Backend development contributions for the Information Systems Expo (ISE!).",
     highlights: [
@@ -35,17 +35,17 @@ const experiences = [
   },
   {
     id: "03",
-    role: "Developer",
-    organization: "Academic Project",
-    category: "ACADEMIC EXPERIENCE",
-    duration: "2022",
+    role: "Frontend Developer",
+    organization: "Gerigi X UKM Expo 2026",
+    category: "PROFESSIONAL EXPERIENCE",
+    duration: "2026",
     description:
-      "Conceptualized an automated plant watering system using Arduino Uno and soil moisture sensors.",
+      "Frontend development contributions for Gerigi X UKM Expo 2026.",
     highlights: [
-      "Programmed Arduino Uno",
-      "Integrated soil moisture sensors",
-      "Designed hardware schematic",
-      "Implemented automated logic",
+      "Developed interactive user interfaces",
+      "Collaborated with UI/UX designers",
+      "Ensured responsive design across devices",
+      "Optimized web application performance",
     ],
   },
 ];

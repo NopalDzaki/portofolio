@@ -2,35 +2,53 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 const selectedProjects = [
   {
-    title: "Automatic Plant Watering System",
-    category: "ACADEMIC PROJECT / HARDWARE",
-    year: 2022,
+    title: "Gerigi X UKM Expo 2026",
+    category: "WEB DEVELOPMENT / FRONTEND",
+    year: 2026,
     description:
-      "Conceptualized an automated plant watering system using Arduino Uno and soil moisture sensors to support efficient watering based on soil conditions.",
+      "Frontend development for the Gerigi X UKM Expo 2026, focusing on creating interactive, responsive, and performant user interfaces.",
     highlights: [
-      "Hardware and sensor integration",
-      "Automated watering logic",
-      "Resource efficiency",
+      "Interactive user interfaces",
+      "Responsive across devices",
+      "Performance optimization",
     ],
-    technologies: ["Arduino Uno", "C++", "Sensors"],
-    link: "#",
+    technologies: ["Next.js", "React", "Tailwind CSS"],
+    link: "https://gerigixukmexpoits.id/",
+    image: "/gerigi.jpg",
   },
   {
-    title: "SIAP BOS Information-System Analysis",
-    category: "ACADEMIC RESEARCH / ANALYSIS",
-    year: 2023,
+    title: "Information Systems Expo 2026",
+    category: "WEB DEVELOPMENT / BACKEND",
+    year: 2026,
     description:
-      "Academic analysis on the implementation of information technology in the SIAP BOS system and its role in supporting more accurate education funding distribution.",
+      "Backend development contributions for the Information Systems Expo (ISE!), including building robust API endpoints and integrating services.",
     highlights: [
-      "Systems Analysis",
-      "Process mapping",
-      "Requirement documentation",
+      "Robust API development",
+      "Backend service integration",
+      "Database query optimization",
     ],
-    technologies: ["Research", "Information Systems", "Analysis"],
-    link: "#",
+    technologies: ["Node.js", "Express", "Database"],
+    link: "https://ise-its.com/",
+    image: "/ise.jpg",
+  },
+  {
+    title: "Bayucaraka UAV Research Team",
+    category: "WEB DEVELOPMENT",
+    year: 2026,
+    description:
+      "Web platform development for the Media Communication division of the Bayucaraka UAV Research Team to showcase achievements and divisions.",
+    highlights: [
+      "Responsive team platform",
+      "Content management structure",
+      "Modern tech stack integration",
+    ],
+    technologies: ["Next.js", "Tailwind CSS", "React"],
+    link: "https://www.bayucaraka-its.com/",
+    image: "/bayucaraka.jpg",
   },
 ];
 
@@ -75,9 +93,20 @@ export function Projects() {
                     !isEven ? "lg:order-2" : "lg:order-1"
                   }`}
                 >
-                  <div className="absolute inset-0 flex items-center justify-center text-text-muted/30 font-mono text-sm">
-                    Image not available
-                  </div>
+                  {project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority={true}
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-text-muted/30 font-mono text-sm">
+                      Image not available
+                    </div>
+                  )}
                   {/* Custom Cursor Interaction Area */}
                   <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="w-20 h-20 rounded-full bg-accent/90 backdrop-blur-sm text-ink flex items-center justify-center font-mono text-xs font-semibold tracking-wider uppercase scale-50 group-hover:scale-100 transition-transform duration-300">
