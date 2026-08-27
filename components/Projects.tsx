@@ -18,7 +18,7 @@ const selectedProjects = [
     ],
     technologies: ["Next.js", "React", "Tailwind CSS"],
     link: "https://gerigixukmexpoits.id/",
-    image: "/gerigi.jpg",
+    image: "/assets/gerigi.jpg",
   },
   {
     title: "Information Systems Expo 2026",
@@ -33,7 +33,7 @@ const selectedProjects = [
     ],
     technologies: ["Node.js", "Express", "Database"],
     link: "https://ise-its.com/",
-    image: "/ise.jpg",
+    image: "/assets/ise.jpg",
   },
   {
     title: "Bayucaraka UAV Research Team",
@@ -48,7 +48,7 @@ const selectedProjects = [
     ],
     technologies: ["Next.js", "Tailwind CSS", "React"],
     link: "https://www.bayucaraka-its.com/",
-    image: "/bayucaraka.jpg",
+    image: "/assets/bayucaraka.jpg",
   },
 ];
 
