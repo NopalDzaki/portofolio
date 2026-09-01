@@ -54,7 +54,7 @@ export function Experience() {
   return (
     <section id="experience" className="relative bg-ink py-24 overflow-hidden">
       {/* Massive background text */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-sans font-bold text-[20vw] leading-none text-white/[0.02] pointer-events-none select-none tracking-tighter w-full text-center">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-sans font-bold text-[20vw] leading-none text-paper/[0.07] pointer-events-none select-none tracking-tighter w-full text-center">
         EXPERIENCES
       </div>
 

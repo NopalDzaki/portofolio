@@ -369,6 +369,16 @@
     right: 0;
   }
 
+  .sm-panel-list[data-numbering] .sm-panel-item::after {
+    right: 0;
+    font-size: 14px;
+    top: 0.2em;
+  }
+
+  .sm-panel-item {
+    padding-right: 28px;
+  }
+
   .staggered-menu-wrapper[data-open] .sm-logo-img {
     filter: invert(100%);
   }

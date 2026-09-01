@@ -9,9 +9,18 @@ import { useEffect, useState } from "react";
 export function GithubActivity() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [blockSize, setBlockSize] = useState(12);
 
   useEffect(() => {
     setMounted(true);
+    const handleResize = () => {
+      if (window.innerWidth < 500) setBlockSize(8);
+      else if (window.innerWidth < 768) setBlockSize(10);
+      else setBlockSize(12);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -42,12 +51,13 @@ export function GithubActivity() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full overflow-x-auto hide-scrollbar border border-border-light rounded-xl p-8 bg-paper-bright flex justify-center"
+          className="w-full border border-border-light rounded-xl p-4 sm:p-8 bg-paper-bright flex justify-center overflow-hidden"
         >
-          <div className="min-w-[800px] flex justify-center">
+          <div className="w-full overflow-x-auto hide-scrollbar flex justify-start sm:justify-center pb-2">
             {mounted && (
               <GitHubCalendar
                 username="NopalDzaki"
+                blockSize={blockSize}
                 colorScheme={resolvedTheme === "dark" ? "dark" : "light"}
                 theme={{
                   light: [

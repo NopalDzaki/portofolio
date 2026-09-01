@@ -107,12 +107,6 @@ export function Projects() {
                       Image not available
                     </div>
                   )}
-                  {/* Custom Cursor Interaction Area */}
-                  <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-20 h-20 rounded-full bg-accent/90 backdrop-blur-sm text-ink flex items-center justify-center font-mono text-xs font-semibold tracking-wider uppercase scale-50 group-hover:scale-100 transition-transform duration-300">
-                      VIEW
-                    </div>
-                  </div>
                 </motion.div>
 
                 {/* Content Container */}
